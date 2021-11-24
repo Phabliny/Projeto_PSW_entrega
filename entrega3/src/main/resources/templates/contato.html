@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adote um Pet</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .caixa {
+            width: 300px;
+            height: 462px;
+            border: 4px solid #17A2B7;
+            border-radius: 20px;
+            background-image: url("img/fundo.jpg"); /* The image used */
+            background-color: #cccccc; /* Used if the image is unavailable */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover; /* Resize the background image to cover the entire container */
+        }
+    </style>
+    <script>
+        function verificar() {
+            nome = document.getElementById("txtNome");
+            telefone = document.getElementById("txtFone")
+            email = document.getElementById("txtEmail")
+            mensagem = document.getElementById("txtSugestoes")
+
+            if (nome.value == "") {
+                alert(`Campo Nome está vazio!`)
+            } else if (telefone.value == ""){
+                alert(`Campo Telefone está vazio!`)
+            } else if (email.value == "") {
+                alert(`Campo Email está vazio!`)
+            } else if (mensagem.value == "") {
+                alert(`Campo Mensagem está vazio!`)
+            } else if((nome.value != "") && (telefone.value != "")  && (email.value != "") && (mensagem.value != "")) {
+                alert("Formulário finalizado com sucesso!")
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <nav th:insert="fragments/barraNav ::navbar"></nav>
+    <main class="d-flex flex-row justify-content-center align-items-center">
+        <div class="caixa mt-4 mb-4 pl-5 pr-5">
+            <form>
+                <h3 class="pt-3">Formulário</h3>
+                <label for="txtNome">Nome:</label>
+                <input type="text" id="txtNome" name="NOME">
+        
+                <br>
+                <label for="txtFone">Telefone:</label>
+                <input type="text" id="txtFone" name="TELEFONE">
+        
+                <br>
+                <label for="txtEmail">Email:</label>
+                <input type="email" id="txtEmail" name="Email">
+                <br>
+
+                <label for="textSugestoes">Mensagem:</label>
+                <br>
+                <textarea id="txtSugestoes" name="SUGESTÕES"
+                    rows="5" cols="23"></textarea>
+        
+                <br>
+                <input type="button" value="Enviar" class="btn bg-white text-dark p-1" onclick="verificar()">
+                <br>
+            </form>
+        
+        </div>
+    </main>
+
+    <footer th:insert="fragments/rodape :: footer" class="bg-info">
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+
+</html>

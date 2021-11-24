@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Adote um Pet</title>
+</head>
+<body>
+    <nav th:insert="fragments/barraNav ::navbar"></nav>
+
+    <main class="font-weight-bold">
+
+        <ul class="text-center m-5">
+            <a href="form-usuario"><input class="ml-3 py-3 px-5 font-weight-bold" type="button" value="Voluntário"></a>
+            <a href="form-usuario"><input class="ml-3 py-3 px-5 font-weight-bold" type="button" value="Usuário"></a>
+        </ul>
+        
+    </main>
+
+    <footer th:insert="fragments/rodape :: footer" class="bg-info footer fixed-bottom">
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>
