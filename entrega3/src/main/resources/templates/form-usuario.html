@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>Adote um Pet</title>
+
+    <script>
+        function limpar(){
+            nome = document.getElementById("nome").value = ""
+            CPF = document.getElementById("cpf").value = ""
+            email = document.getElementById("email").value = ""
+            endereco = document.getElementById("endereco").value = ""
+            num = document.getElementById("num").value = ""
+            sexo = document.getElementById("sexo").value = ""
+            dataNasc = document.getElementById("dataNasc").value = "dd/mm/aaaa"
+            senha = document.getElementById("senha").value = ""
+        }
+    </script>
 </head>
 <body>
     <nav th:insert="fragments/barraNav ::navbar"></nav>
@@ -17,8 +30,8 @@
                 <div class="row">
                         <div class="form-group col-md-12">
                             Nome Completo:
-                            <input th:field="*{id}" type="hidden">
-                            <input th:field="*{nome}" class="form-control" type="text">
+                            <input th:field="*{id}" type="hidden" >
+                            <input th:field="*{nome}" class="form-control" type="text" id="nome">
                         </div>
                     
                         <div class="form-group col-md-4">
@@ -74,7 +87,7 @@
             <div class="container mt-1">
                 <div class="row justify-content-center p-2 m-2">
                     <input class="mx-1 px-3 py-2 font-weight-bold h5" type="submit" value="Cadastrar">
-                    <input class="mx-1 px-3 py-2 font-weight-bold h5" type="button" value="Limpar">
+                    <input class="mx-1 px-3 py-2 font-weight-bold h5" type="button" value="Limpar" onclick="limpar()">
                 </div>
             </div>
         </form>
