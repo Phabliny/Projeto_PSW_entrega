@@ -9,12 +9,12 @@
     <title>Adote um Pet</title>
 </head>
 <body>
-    <nav th:insert="fragments/barra_navegacao ::navbar"></nav>
+    <nav th:insert="fragments/barraNav ::navbar"></nav>
 
     <main class="font-weight-bold">
-        <form class="mt-5">
+        <form class="mt-4">
             <div class="container w-75">
-                <h2 class="text-center mb-5">Cadastro de Animais</h2>
+                <h2 class="text-center mb-4">Cadastro de Animais</h2>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label for="name">Nome</label>
@@ -59,14 +59,14 @@
             <div class="container mt-4">
                 <div class="row justify-content-center p-2 m-2">
                     <input class="mx-1 px-3 py-2 font-weight-bold h5" type="button" value="Cadastrar">
-                    <input class="mx-1 px-3 py-2 font-weight-bold h5" type="button" value="Limpar">
+                    <input class="mx-1 px-3 py-2 font-weight-bold h5" type="reset" value="Limpar">
                 </div>
             </div>
         </form>
 
     </main>
 
-    <footer th:insert="fragments/rodape :: footer" class="bg-info">
+    <footer th:insert="fragments/rodape :: footer" class="bg-info footer fixed-bottom">
 
     </footer>
 

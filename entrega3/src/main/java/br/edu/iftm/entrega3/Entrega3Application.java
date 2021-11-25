@@ -24,5 +24,10 @@ public class Entrega3Application implements CommandLineRunner{
 
 		jdbcTemplate.update("INSERT INTO usuario(nome, cpf, email, endereco, telefone, dataNasc, sexo, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", "Clarimundo Machado", "55566677788", "clarimundo@gmail.com", "rua maria jose", "995764562","04-10-1980", "Masculino", "147934");
 		
+		jdbcTemplate.execute("CREATE TABLE animal(id SERIAL, nome VARCHAR(255), raca VARCHAR(255), dataNasc varchar(255), idade varchar(255), porte varchar(255), descricao varchar(255), PRIMARY KEY (id))");
+
+		jdbcTemplate.update("INSERT INTO animal(nome, raca, dataNasc, idade, porte, descricao) VALUES(?, ?, ?, ?, ?, ?)", "Thor", "vira-lata", "12-10-2020", "1.6", "grande", "já vacinado");
+
+		jdbcTemplate.update("INSERT INTO animal(nome, raca, dataNasc, idade, porte, descricao) VALUES (?, ?, ?, ?, ?, ?)", "Mel", "vira-lata", "05-01-2013", "10.5", "grande", "já vacinado e castrada");
 	}
 }

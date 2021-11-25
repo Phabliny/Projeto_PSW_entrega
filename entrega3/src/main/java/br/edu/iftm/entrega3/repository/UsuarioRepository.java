@@ -40,7 +40,7 @@ public class UsuarioRepository {
 
     public int atualizaUsuario(Usuario usuario){
         String consulta = "update usuario set nome = ? where id = ?";
-        return jdbc.update(consulta, usuario.getId(), usuario.getNome(), usuario.getCpf(), usuario.getEmail(), usuario.getEndereco(), usuario.getTelefone(), usuario.getDataNasc(), usuario.getSexo(), usuario.getSenha());
+        return jdbc.update(consulta, usuario.getNome(), usuario.getId());
     }
 
 }

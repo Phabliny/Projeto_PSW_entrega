@@ -18,23 +18,20 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>CPF</th>
-                <th>Email</th>
-                <th>Telefone</th>
-                <th>Data Nascimento</th>
-                <th>Sexo</th>
-                <th>Senha</th>
-                <th>Ações</th>
+                <th>raca</th>
+                <th>dataNasc</th>
+                <th>idade</th>
+                <th>porte</th>
+                <th>descricao</th>
             </tr>
-            <tr th:each="usuario:${usuarios}" th:object="${usuario}">
+            <tr th:each="animal:${animais}" th:object="${animal}">
                 <td class="table-light" th:text="*{id}">1</td>
                 <td class="table-light" th:text="*{nome}">2</td>
-                <td class="table-light" th:text="*{cpf}">3</td>
-                <td class="table-light" th:text="*{email}">4</td>
-                <td class="table-light" th:text="*{telefone}">5</td>
-                <td class="table-light" th:text="*{dataNasc}">6</td>
-                <td class="table-light" th:text="*{sexo}">7</td>
-                <td class="table-light" th:text="*{senha}">8</td>
+                <td class="table-light" th:text="*{raca}">3</td>
+                <td class="table-light" th:text="*{dataNasc}">4</td>
+                <td class="table-light" th:text="*{idade}">5</td>
+                <td class="table-light" th:text="*{porte}">6</td>
+                <td class="table-light" th:text="*{descricao}">7</td>
                 <td class="table-light">
                     <a th:href="@{/editar-usuario(id=*{id})}"><span class="glyphicon glyphicon glyphicon-pencil pl-3 pr-4"></span></a>
                     <a th:href="@{/excluir-usuario(id=*{id})}"><span class="glyphicon glyphicon glyphicon-remove"></a>
