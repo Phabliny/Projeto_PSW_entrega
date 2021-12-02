@@ -16,16 +16,13 @@ public class AnimalRepository {
         String consulta = "select * from animal;";
 
         return jdbc.query(consulta,
-                (resultados, numeroDaLinha) -> new Animal(resultados.getInt("id"), resultados.getString("nome"),
-                        resultados.getString("raca"), resultados.getString("dataNasc"), resultados.getString("idade"),
-                        resultados.getString("porte"), resultados.getString("descricao")));
+                (resultados, numeroDaLinha) -> new Animal(resultados.getInt("id"), resultados.getString("nome"), resultados.getString("raca"), resultados.getString("dataNasc"), resultados.getString("idade"), resultados.getString("porte"), resultados.getString("descricao")));
     }
 
     public int gravaAnimal(Animal animal) {
-        String consulta = "insert into animal(nome, raca, raca, dataNasc, idade, porte, descricao) values(?,?,?,?,?,?)";
+        String consulta = "insert into animal(nome, raca, dataNasc, idade, porte, descricao) values(?,?,?,?,?,?)";
 
-        return jdbc.update(consulta, animal.getNome(), animal.getRaca(), animal.getDataNasc(), animal.getIdade(),
-                animal.getPorte(), animal.getDescricao());
+        return jdbc.update(consulta, animal.getNome(), animal.getRaca(), animal.getDataNasc(), animal.getIdade(), animal.getPorte(), animal.getDescricao());
     }
 
     public int excluirAnimal(Integer cod) {
@@ -36,9 +33,7 @@ public class AnimalRepository {
 
     public Animal buscaPorIdAnimal(Integer id) {
         return jdbc.queryForObject("select * from animal where id = ?", (resultSet, rowNum) -> {
-            return new Animal(resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("raca"),
-                    resultSet.getString("dataNasc"), resultSet.getString("idade"), resultSet.getString("porte"),
-                    resultSet.getString("descricao"));
+            return new Animal(resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("raca"), resultSet.getString("dataNasc"), resultSet.getString("idade"), resultSet.getString("porte"),  resultSet.getString("descricao"));
         }, id);
     }
 

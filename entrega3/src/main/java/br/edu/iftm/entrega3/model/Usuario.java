@@ -1,5 +1,7 @@
 package br.edu.iftm.entrega3.model;
 
+import java.util.List;
+
 public class Usuario {
 
     private Integer id;
@@ -11,6 +13,7 @@ public class Usuario {
     private String dataNasc;
     private String sexo;
     private String senha;
+    private List<Animal> listaDeAnimais;
 
     public Usuario() {
     }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +11,7 @@
     <style>
         .caixa {
             width: 280px;
-            height: 446px;
+            height: 430px;
             border: 4px solid #17A2B7;
             border-radius: 20px;
         }
@@ -20,19 +21,25 @@
             border-radius: 10px;
         }
     </style>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var titulo = /*[[${message}]]*/
+    console.log(titulo)
+    /*]]>*/
+  </script> 
 </head>
 
 <body>
     <nav th:insert="fragments/barraNav ::navbar"></nav>
     <main class="pr-4 pl-2">
-        
-        <div class="pl-5 pr-5 mt-3 mb-3 d-flex flex-row justify-content-center align-items-center"> 
+        <div class="pl-5 pr-5 d-flex flex-row mt-5 justify-content-center align-items-center"> 
             <img src="https://images.vexels.com/media/users/3/136984/isolated/lists/0f7b26b01932f7912bd4351d2286b2af-seta-direita-grossa-1.png" width="100px" height="50px" style="transform:rotate(180deg)">
 
-            <div class="caixa mt-3 mb-3 d-flex flex-column align-items-center">
-                <img class="foto_cachorro mt-3" src="https://matsudapet.com.br/blog/wp-content/uploads/2019/08/shutterstock_559799125-compressed.jpg" width="220px" height="180px">
-                <h4 class="mt-2">Thor</h4>
-                <div class="ml-3 mr-2 mb-3">
+            <div class="caixa mt-3 d-flex flex-column align-items-center">
+                <img class="foto_cachorro mt-2" src="https://matsudapet.com.br/blog/wp-content/uploads/2019/08/shutterstock_559799125-compressed.jpg" width="220px" height="180px">
+                <h4 class="mt-2"><span>Thor</span></h4>
+                <div class="ml-3 mr-2 mb-2">
                     <div class="d-flex flex-row p-0 m-0">
                         <p class="font-weight-bold p-0 m-0 pr-1">Idade:</p>
                         <p class="p-0 m-0">4 meses</p>
@@ -54,6 +61,7 @@
                 <a href="../cadAdocao.html"><input type="button" value="Adotar" class="mt-1 btn btn-info text-dark font-weight-bold"></a>
 
             </div>
+
             <img src="https://images.vexels.com/media/users/3/136984/isolated/lists/0f7b26b01932f7912bd4351d2286b2af-seta-direita-grossa-1.png" width="100px" height="50px">
         </div>
     </main>
