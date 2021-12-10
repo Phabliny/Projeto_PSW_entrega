@@ -1,5 +1,6 @@
 package br.edu.iftm.adoteumpet.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +16,46 @@ public class AnimalRepository {
 
     public List<Animal> buscaTodosAnimais() {
         String consulta = "select * from animal;";
-
-        return jdbc.query(consulta,
-                (resultados, numeroDaLinha) -> new Animal(resultados.getInt("id"), resultados.getString("nome"), 
-                resultados.getString("data_nasc"), (char)resultados.getInt("sexo"),resultados.getString("raca"),
-                (char)resultados.getInt("porte"),  resultados.getString("data_entrada"), resultados.getString("descricao"), resultados.getString("data_adocao"), resultados.getBoolean("validacao_adocao"), 
-                new Usuario(resultados.getInt("id"), resultados.getString("nome"),resultados.getString("cpf"), resultados.getString("email"), 
-                resultados.getString("endereco"), resultados.getString("telefone"), resultados.getString("data_nasc"), (char)resultados.getInt("sexo"), resultados.getString("senha"))));
+        List<Animal> lista = new ArrayList<Animal>();
+        lista = jdbc.query(consulta,
+                (resultados, numeroDaLinha) -> new Animal(resultados.getInt("id"), resultados.getString("nome"),
+                        resultados.getString("data_nasc"), resultados.getString("sexo").charAt(0),
+                        resultados.getString("raca"),
+                        resultados.getString("porte").charAt(0), resultados.getString("data_entrada"),
+                        resultados.getString("descricao"), resultados.getString("data_adocao"),
+                        resultados.getBoolean("validacao_adocao")));
+        for (Animal animal : lista) { System.out.println("----------------" + animal.getNome());
+            String sql = "SELECT u.id , u.nome, u.cpf, u.email FROM ANIMAL, USUARIO u WHERE u.ID = ANIMAL.ID_USER AND ANIMAL.ID = ?;";
+            Usuario usuario = null;
+            try {
+                usuario = jdbc.queryForObject( 
+                    sql,
+                    (res, linha) -> new Usuario(
+                            res.getInt("id"),
+                            res.getString("nome"),
+                            res.getString("cpf"),
+                            res.getString("email") /*,
+                            res.getString("endereco"),
+                            res.getString("telefone"),
+                            res.getString("dataNasc"),
+                            (char) res.getInt("sexo"),
+                            res.getString("senha")*/),
+                    animal.getId());
+            } catch (Exception e) {
+                System.out.println("ERRO ================================== " + e.getMessage());
+            } 
+            animal.setUsuario(usuario);
+        }
+        return lista;
     }
 
     public int gravaAnimal(Animal animal) {
-        String consulta = "insert into animal(nome, data_nasc, raca, porte, data_entrada, descricao, data_adocao, validacao_adocao, id_user) values(?,?,?,?,?,?,?,?,?)";
-
-        return jdbc.update(consulta, animal.getNome(), animal.getData_nasc(), animal.getRaca(), animal.getPorte(), animal.getData_entrada(), animal.getData_adocao(), animal.getValidacao_adocao(), animal.getUsuario().getId());
+        System.out.println("================" + animal);
+        String consulta = "insert into animal(nome, data_nasc, sexo, raca, porte, data_entrada, descricao) values(?,?,?,?,?,?,?)";
+        System.out.println("++++++++++++++++" + jdbc);
+        System.out.println("nome" + animal.getNome());
+        return jdbc.update(consulta, animal.getNome(), animal.getData_nasc(), animal.getSexo(), animal.getRaca(),
+                animal.getPorte(), animal.getData_entrada(), animal.getDescricao());
     }
 
     public int excluirAnimal(Integer cod) {
@@ -39,15 +67,17 @@ public class AnimalRepository {
     public Animal buscaPorIdAnimal(Integer id) {
         return jdbc.queryForObject("select * from animal where id = ?", (resultSet, rowNum) -> {
             return new Animal(resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("data_nasc"),
-            (char)resultSet.getInt("sexo") , resultSet.getString("raca"),  
-            (char)resultSet.getInt("porte"),resultSet.getString("data_entrada"), resultSet.getString("descricao"), resultSet.getString("data_adocao"), resultSet.getBoolean("validacao_adocao"), 
-            new Usuario(resultSet.getInt("id"), resultSet.getString("nome"),resultSet.getString("cpf"), resultSet.getString("email"), 
-            resultSet.getString("endereco"), resultSet.getString("telefone"), resultSet.getString("data_nasc"), (char)resultSet.getInt("sexo"), resultSet.getString("senha")));
+                    (char) resultSet.getInt("sexo"), resultSet.getString("raca"),
+                    (char) resultSet.getInt("porte"), resultSet.getString("data_entrada"),
+                    resultSet.getString("descricao"), resultSet.getString("data_adocao"),
+                    resultSet.getBoolean("validacao_adocao"));
         }, id);
     }
 
     public int atualizaAnimal(Animal animal) {
         String consulta = "update animal set nome = ? where id = ?";
-        return jdbc.update(consulta, animal.getId(), animal.getNome(), animal.getData_nasc(), animal.getRaca(), animal.getPorte(), animal.getData_entrada(), animal.getDescricao(), animal.getData_adocao(), animal.getValidacao_adocao());
+        return jdbc.update(consulta, animal.getId(), animal.getNome(), animal.getData_nasc(), animal.getRaca(),
+                animal.getPorte(), animal.getData_entrada(), animal.getDescricao(), animal.getData_adocao(),
+                animal.getValidacao_adocao());
     }
 }

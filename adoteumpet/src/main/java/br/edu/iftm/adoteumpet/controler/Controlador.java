@@ -82,7 +82,7 @@ public class Controlador {
     }*/
 
     @PostMapping("/cadAnimais")
-    public String cadastroAnimail(Animal animal) {
+    public String cadastroAnimail(Animal animal) { System.out.println(">>>>>>>>>>>>>" + animal);
         if (animal.getId() == null)
             repoAnimal.gravaAnimal(animal);
         else

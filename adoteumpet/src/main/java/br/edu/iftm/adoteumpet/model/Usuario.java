@@ -29,6 +29,14 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Usuario(Integer id, String nome, String cpf, String email){
+ 
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+    }
+
     public Integer getId() {
         return this.id;
     }
