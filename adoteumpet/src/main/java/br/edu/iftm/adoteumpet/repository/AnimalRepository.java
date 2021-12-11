@@ -52,23 +52,19 @@ public class AnimalRepository {
     public int gravaAnimal(Animal animal) {
         System.out.println("================" + animal);
         String consulta = "insert into animal(nome, data_nasc, sexo, raca, porte, data_entrada, descricao) values(?,?,?,?,?,?,?)";
-        System.out.println("++++++++++++++++" + jdbc);
-        System.out.println("nome" + animal.getNome());
         return jdbc.update(consulta, animal.getNome(), animal.getData_nasc(), animal.getSexo(), animal.getRaca(),
                 animal.getPorte(), animal.getData_entrada(), animal.getDescricao());
     }
 
     public int excluirAnimal(Integer cod) {
-        System.out.println(" -------------> id = " + cod);
         String consulta = "delete from animal where id = ?";
         return jdbc.update(consulta, cod);
     }
 
     public Animal buscaPorIdAnimal(Integer id) {
         return jdbc.queryForObject("select * from animal where id = ?", (resultSet, rowNum) -> {
-            return new Animal(resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("data_nasc"),
-                    (char) resultSet.getInt("sexo"), resultSet.getString("raca"),
-                    (char) resultSet.getInt("porte"), resultSet.getString("data_entrada"),
+            return new Animal(resultSet.getInt("id"), resultSet.getString("nome"), resultSet.getString("data_nasc"), resultSet.getString("sexo").charAt(0), resultSet.getString("raca"),
+                    resultSet.getString("porte").charAt(0), resultSet.getString("data_entrada"),
                     resultSet.getString("descricao"), resultSet.getString("data_adocao"),
                     resultSet.getBoolean("validacao_adocao"));
         }, id);
