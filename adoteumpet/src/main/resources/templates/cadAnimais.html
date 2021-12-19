@@ -31,11 +31,10 @@
                         <label for="">Sexo: </label>
                         <div class="form-inline">
                             <input type="radio" th:field="*{sexo}" th:value="f">
-                            <label class="mx-1" for="feminino">feminino</label>
+                            <label class="mx-1" for="feminino">Fêmea</label>
 
                             <input type="radio" th:field="*{sexo}" th:value="m">
-                            <label class="mx-1" for="masculino">Masculino</label>
-                            
+                            <label class="mx-1" for="masculino">Macho</label>
                         </div>
                     </div>
                 </div>
@@ -77,7 +76,7 @@
 
     </main>
 
-    <footer th:insert="fragments/rodape :: footer" class="bg-info footer fixed-bottom">
+    <footer th:insert="fragments/rodape :: footer" class="bg-info">
 
     </footer>
 

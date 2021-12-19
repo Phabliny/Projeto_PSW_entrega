@@ -25,7 +25,7 @@ public class Controlador {
     @Autowired
     AnimalRepository repoAnimal;
 
-    @GetMapping(value = "/home")
+    @GetMapping(value = {"/","/home"})
     public String home() {
         return "home";
     }
@@ -133,7 +133,7 @@ public class Controlador {
             repo.atualizaUsuario(usuario);
         return "redirect:/usuarios";
     }
-
+    
     @GetMapping(value = "/editar-usuario")
     public String editarUsuario(@RequestParam(name = "id", required = true) Integer cod, Model modelo) {
         modelo.addAttribute("usuario", repo.buscaPorId(cod));

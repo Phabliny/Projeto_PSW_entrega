@@ -16,8 +16,23 @@ public class Animal {
     public Animal() {
     }
 
-    public Animal(Integer id, String nome, String data_nasc, char sexo, String raca, char porte, String data_entrada, 
-        String descricao, String data_adocao, boolean validacao_adocao) {
+    public Animal(Integer id, String nome, String data_nasc, char sexo, String raca, char porte, String data_entrada, String descricao, String data_adocao, boolean validacao_adocao, Usuario usuario) {
+        this.id = id;
+        this.nome = nome;
+        this.data_nasc = data_nasc;
+        this.sexo = sexo;
+        this.raca = raca;
+        this.porte = porte;
+        this.data_entrada = data_entrada;
+        this.descricao = descricao;
+        this.data_adocao = data_adocao;
+        this.validacao_adocao = validacao_adocao;
+        this.usuario = usuario;
+    }
+
+
+    public Animal(Integer id, String nome, String data_nasc, char sexo, String raca, char porte, String data_entrada,
+            String descricao, String data_adocao, boolean validacao_adocao) {
         this.id = id;
         this.nome = nome;
         this.data_nasc = data_nasc;

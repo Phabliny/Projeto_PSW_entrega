@@ -46,17 +46,27 @@ public class AnimalControlador {
 		return "redirect:/animais";
 	}
 
-	
 	@GetMapping(value = "/editar-animal")
 	public String editarAnimal(@RequestParam(name = "id", required = true) Integer cod, Model modelo) {
 		modelo.addAttribute("animal", repo.buscaPorIdAnimal(cod));
 		return "animais";
 	}
-
+	
     @GetMapping(value = "/excluir-animal")
 	public String excluirAnimal(@RequestParam(name = "id", required = true) Integer cod) {
 		repo.excluirAnimal(cod);
 		return "redirect:animais";
 	}
-    
+	/*========================= teste validação cadastro =========================================== */
+
+	@RequestMapping (value = "/adote", method = RequestMethod.GET)
+	public String validacaoAdocao(Animal animal, RedirectAttributes ra) {
+		if (animal.getUsuario() == null) {
+			repo.atualizaAdocao(animal);
+		} else {
+			ra.addFlashAttribute("sucessmensage", "Sua solicitação está em análise! Um voluntário entrará em contato!");
+		}
+		return "redirect:/animais";
+	}
+
 }
