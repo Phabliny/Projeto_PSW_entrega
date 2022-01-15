@@ -1,17 +1,12 @@
+<!-- ******************************************
+*  Created On : Mon Jan 10 2022
+*  Modelo de arquivo HTML para adicionar nova tela de conteúdo dentro do layout estabelecido no arquivo fragmentos/layout.html
+******************************************* -->
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adote um Pet</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
-
-<body>
-    <nav th:insert="fragments/barraNav ::navbar"></nav>
-    <main class="pr-4 pl-2">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout">
+<div th:fragment="conteudo" class="container">
+    <!-- insira seu código aqui -->
+    <div class="pr-4 pl-2">
         <div class="pl-5 pr-5 mt-1 mb-1">
             <h2 class="text-warning pt-2">Apoios</h2>
             <div class="mt-3 d-flex flex-row">
@@ -34,13 +29,7 @@
             </div>  
         </div>
         
-    </main>
-
-    <footer th:insert="fragments/rodape :: footer" class="bg-info">
-
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-</body>
+    </div>
+</div>
 
 </html>

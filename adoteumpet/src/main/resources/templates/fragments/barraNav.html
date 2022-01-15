@@ -1,24 +1,55 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
-    <div th:fragment="navbar" class="d-flex justify-content-between navbar navbar-expand-md navbar-light bg-info text-white">
-        <div class="pl-5">
-            <h2><a href="../home" class="text-decoration-none text-white">Adote um Pet</a></h2>
-        </div>
-        
-        <div> 
-            <ul class="navbar-nav mr-4 pr-5">
-                <!--Adicionei o todos só para facilitar enquanto estamos alerando o layout-->
-                <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a href="../usuarios" class="text-white">Todos</a></li> 
-                <!--Tirar o todos depois-->
-                
-                <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a href="../home" class="text-white">Home</a></li>
-                <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a href="../sobre" class="text-white">Sobre</a></li>
-                <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a href="../adote" class="text-white">Adote</a></li>
-                <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a href="../contato" class="text-white">Contato</a></li>
-                <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a href="../apoio" class="text-white">Apoio</a></li>
-                <a href="../perfil"><input class="ml-3 py-2 px-3 font-weight-bold" type="button" value="Cadastre-se"></a>
-                <a href="../login"><input class="ml-3 py-2 px-3 font-weight-bold" type="button" value="Login"></a>
-            </ul>
-        </div>
+<div th:fragment="navbar"
+    class="d-flex justify-content-between navbar navbar-expand-md navbar-light bg-info text-white">
+    <div class="pl-5">
+        <h2><a th:href="@{home}" class="text-decoration-none text-white">Adote um Pet</a></h2>
     </div>
+
+    <div>
+        <!--Navbar anônimo-->
+        <ul class="navbar-nav mr-4 pr-5" sec:authorize="isAnonymous()">
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{home}" class="text-white">Home</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{sobre}" class="text-white">Sobre</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{adote}" class="text-white">Adote</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{contato}" class="text-white">Contato</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{apoio}" class="text-white">Apoio</a></li>
+            <a th:href="@{form-usuario}"><input class="ml-3 py-2 px-3 font-weight-bold" type="button" value="Cadastre-se"></a>
+            <a th:href="@{login}"><input class="ml-3 py-2 px-3 font-weight-bold" type="button" value="Login"></a>
+        </ul>
+
+        <!--Navbar autenticado como cliente-->
+        <ul class="navbar-nav mr-4 pr-5" sec:authorize="hasAuthority('cliente')"> 
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{home}" class="text-white">Home</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{sobre}" class="text-white">Sobre</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{adote}" class="text-white">Adote</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{contato}" class="text-white">Contato</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{apoio}" class="text-white">Apoio</a></li>
+            <div class="py-2" sec:authorize="isAuthenticated()">
+                <span sec:authorize="isAuthenticated()" class="text-white small" sec:authentication="name"></span>
+            </div>
+            <div>
+                <form th:action="@{/logout}" method="post" class="ml-4 mt-2">
+                    <input class="btn btn-secondary btn-sm px-3 py-1 small" type="submit" value="Sair" />
+                </form>
+            </div>
+        </ul>
+
+        <!--Navbar admin-->
+        <ul class="navbar-nav mr-4 pr-5" sec:authorize="hasAuthority('admin')"> 
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{usuarios}" class="text-white">Todos</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{cadAnimais}" class="text-white">Cadastrar animais</a></li>
+            <li class="nav-item pr-3  pl-3 pt-2 pb-2"><a th:href="@{adote}" class="text-white">Adote</a></li>
+            <div class="py-2" sec:authorize="isAuthenticated()">
+                <span sec:authorize="isAuthenticated()" class="text-white small" sec:authentication="name"></span>
+            </div>
+            <div>
+                <form th:action="@{/logout}" method="post" class="ml-4 mt-2" sec:authorize="isAuthenticated()">
+                    <input class="btn btn-secondary btn-sm px-3 py-1 small" type="submit" value="Sair" />
+                </form>
+            </div>
+        </ul>
+    </div>
+</div>
+
 </html>

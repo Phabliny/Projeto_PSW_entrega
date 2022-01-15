@@ -27,3 +27,23 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<!-- ******************************************
+*  Created On : Mon Jan 10 2022
+*  Modelo de arquivo HTML para adicionar nova tela de conteúdo dentro do layout estabelecido no arquivo fragmentos/layout.html
+******************************************* -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout">
+<div th:fragment="conteudo" class="container">
+    <!-- insira seu código aqui -->
+    <div class="font-weight-bold">
+
+        <ul class="text-center m-5">
+            <a href="form-usuario"><input class="ml-3 py-3 px-5 font-weight-bold" type="button" value="Voluntário"></a>
+            <a href="form-usuario"><input class="ml-3 py-3 px-5 font-weight-bold" type="button" value="Usuário"></a>
+        </ul>
+        
+    </div>
+</div>
+
+</html>

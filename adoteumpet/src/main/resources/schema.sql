@@ -7,13 +7,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
     endereco VARCHAR(255),
     telefone VARCHAR(255) UNIQUE,
     email VARCHAR(255) UNIQUE,
-    senha VARCHAR(255)
+    senha VARCHAR(255),
+    papel SET ('admin', 'cliente')
     
 );
 
 CREATE TABLE IF NOT EXISTS `animais` (
 	id_pet INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     nome VARCHAR(255),
+    imagem VARCHAR(255),
     data_nasc VARCHAR(255),
     sexo CHAR(1),
     raca VARCHAR(255),

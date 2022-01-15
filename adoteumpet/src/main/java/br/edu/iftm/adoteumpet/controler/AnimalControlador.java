@@ -1,6 +1,9 @@
 package br.edu.iftm.adoteumpet.controler;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,39 +14,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.iftm.adoteumpet.model.Animal;
 import br.edu.iftm.adoteumpet.repository.AnimalRepository;
 
-
+@Controller
 public class AnimalControlador {
-    @Autowired
-    AnimalRepository repo;
 
-	@GetMapping(value="/cadAnimais")
-    public String cadastrar() {
-        return "cadAnimais";
-    }
+	@Autowired
+	AnimalRepository repo;
 
-    @RequestMapping("/cadAnimais")
-    String cadastroAnimal (Model model) {
-        model.addAttribute("animal", new Animal());
-        return "/cadAnimais";
-    }
+	@RequestMapping(value = "/cadAnimais", method = RequestMethod.POST)
+	public String gravarAnimal(Animal animal, RedirectAttributes ra) {
+		System.out.println("????????????" + animal.getNome());
+		repo.gravaAnimal(animal);
+		ra.addFlashAttribute("message", "Animal cadastrado com sucesso!");
 
-    @RequestMapping (value = "/cadAnimais", method = RequestMethod.POST)
-    public String gravarAnimal(Animal animal, RedirectAttributes ra){
-        System.out.println(animal.getNome());
-        repo.gravaAnimal(animal);
-        ra.addFlashAttribute("sucessmensage", "Usuário cadastrado com sucesso!");
-        
-        return "redirect:/cadAnimais";
-    }
-
-	@RequestMapping (value = "/animais", method = RequestMethod.GET)
-	public String processaAnimal(Animal animal) {
-		if (animal.getId() == null) {
-			repo.gravaAnimal(animal);
-		} else {
-			repo.atualizaAnimal(animal);
-		}
-		return "redirect:/animais";
+		return "redirect:/cadAnimais";
 	}
 
 	@GetMapping(value = "/editar-animal")
@@ -51,22 +34,24 @@ public class AnimalControlador {
 		modelo.addAttribute("animal", repo.buscaPorIdAnimal(cod));
 		return "animais";
 	}
-	
-    @GetMapping(value = "/excluir-animal")
+
+	@GetMapping(value = "/excluir-animal")
 	public String excluirAnimal(@RequestParam(name = "id", required = true) Integer cod) {
 		repo.excluirAnimal(cod);
 		return "redirect:animais";
 	}
-	/*========================= teste validação cadastro =========================================== */
 
-	@RequestMapping (value = "/adote", method = RequestMethod.GET)
-	public String validacaoAdocao(Animal animal, RedirectAttributes ra) {
-		if (animal.getUsuario() == null) {
-			repo.atualizaAdocao(animal);
-		} else {
-			ra.addFlashAttribute("sucessmensage", "Sua solicitação está em análise! Um voluntário entrará em contato!");
-		}
-		return "redirect:/animais";
+	@GetMapping("/animais")
+	String inicioAnimal(Model model) {
+		List<Animal> animais = repo.buscaTodosAnimais();
+		model.addAttribute("animais", animais);
+		return "animais";
+	}
+
+	@GetMapping("/cadAnimais")
+	String formAnimal(Model model) {
+		model.addAttribute("animal", new Animal());
+		return "cadAnimais";
 	}
 
 }
